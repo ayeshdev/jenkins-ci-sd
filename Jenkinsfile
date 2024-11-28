@@ -1,6 +1,10 @@
 pipeline {
     agent any  // This means the job can run on any available Jenkins agent
 
+    tools {
+            maven 'Maven_3_9_9' // Name of Maven installation as configured in Jenkins
+        }
+
     environment {
         // Define any environment variables you might need, such as Java Home
         JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
