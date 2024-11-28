@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         // Define any environment variables you might need, such as Java Home
-        JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
+        JAVA_HOME = "C:/Program Files/Java/jdk-17/bin"
         MAVEN_HOME = "C:/Users/shado/Downloads/apache-maven-3.9.9" // If Maven is installed in a custom path
         PATH = "${MAVEN_HOME}/bin:${env.PATH}" // Ensure Maven is available in the path
     }
