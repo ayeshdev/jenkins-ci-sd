@@ -21,7 +21,7 @@ pipeline {
                 // Step to build the Spring Boot application using Maven
                 script {
                     // Run Maven clean package without tests (if desired)
-                    sh 'mvn clean package -DskipTests'
+                    bat 'mvn clean package -DskipTests'
                 }
             }
         }
@@ -31,7 +31,7 @@ pipeline {
                 // Step to run tests for the Spring Boot application
                 script {
                     // Run the tests using Maven
-                    sh 'mvn test'
+                    bat 'mvn test'
                 }
             }
         }
