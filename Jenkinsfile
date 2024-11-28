@@ -4,6 +4,8 @@ pipeline {
     environment {
         // Define any environment variables you might need, such as Java Home
         JAVA_HOME = "/usr/lib/jvm/java-17-openjdk-amd64"
+        MAVEN_HOME = "/usr/share/maven" // If Maven is installed in a custom path
+        PATH = "${MAVEN_HOME}/bin:${env.PATH}" // Ensure Maven is available in the path
     }
 
     stages {
@@ -18,6 +20,7 @@ pipeline {
             steps {
                 // Step to build the Spring Boot application using Maven
                 script {
+                    // Run Maven clean package without tests (if desired)
                     sh 'mvn clean package -DskipTests'
                 }
             }
@@ -27,6 +30,7 @@ pipeline {
             steps {
                 // Step to run tests for the Spring Boot application
                 script {
+                    // Run the tests using Maven
                     sh 'mvn test'
                 }
             }
@@ -36,7 +40,9 @@ pipeline {
             steps {
                 // Step to deploy the application (you can customize this for your needs)
                 echo "Deploying application to the server"
-                // Example: sh 'deploy.sh' (if you have a deploy script for example)
+                // Example of deploying to a remote server:
+                // sh 'scp target/my-app.jar user@server:/path/to/deploy'
+                // Or use your deployment tool/steps
             }
         }
     }
@@ -45,10 +51,12 @@ pipeline {
         success {
             // Actions to take if the build and tests are successful
             echo "Build and tests were successful!"
+            // You can notify a Slack channel or send an email here
         }
         failure {
             // Actions to take if the build or tests fail
             echo "Build failed! Check the logs for more details."
+            // You can also notify on failure, send failure reports, etc.
         }
     }
 }
